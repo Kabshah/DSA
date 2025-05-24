@@ -1,0 +1,82 @@
+import java.util.*;
+
+class Ticket {
+    String ticketId, issue, status;
+
+    Ticket(String ticketId, String issue, String status) {
+        this.ticketId = ticketId;
+        this.issue = issue;
+        this.status = status;
+    }
+}
+
+public class Main {
+    Queue<Ticket> ticketQueue = new LinkedList<>();
+    HashMap<String, Ticket> ticketMap = new HashMap<>();
+    Scanner scanner = new Scanner(System.in);
+
+    void createTicket(String ticketId, String issue) {
+        Ticket ticket = new Ticket(ticketId, issue, "Open");
+        ticketQueue.add(ticket);
+        ticketMap.put(ticketId, ticket);
+        System.out.println("Ticket Created: " + ticketId);
+    }
+
+    void resolveTicket(String ticketId) {
+        Ticket ticket = ticketMap.get(ticketId);
+        if (ticket != null && ticket.status.equals("Open")) {
+            ticket.status = "Resolved";
+            System.out.println("Ticket " + ticketId + " is Resolved.");
+        } else {
+            System.out.println("Ticket not found or already resolved.");
+        }
+    }
+
+    void listTickets() {
+        System.out.println("All Tickets:");
+        for (Ticket ticket : ticketQueue) {
+            System.out.println("ID: " + ticket.ticketId + " | Issue: " + ticket.issue + " | Status: " + ticket.status);
+        }
+    }
+
+    public static void main(String[] args) {
+        Main system = new Main();
+        boolean running = true;
+
+        while (running) {
+            System.out.println("\nCustomer Support System");
+            System.out.println("1. Create Ticket");
+            System.out.println("2. Resolve Ticket");
+            System.out.println("3. List All Tickets");
+            System.out.println("4. Exit");
+            System.out.print("Choose an option: ");
+            
+            int choice = system.scanner.nextInt();
+            system.scanner.nextLine();  // Consume newline left-over
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter Ticket ID: ");
+                    String ticketId = system.scanner.nextLine();
+                    System.out.print("Enter Issue Description: ");
+                    String issue = system.scanner.nextLine();
+                    system.createTicket(ticketId, issue);
+                    break;
+                case 2:
+                    System.out.print("Enter Ticket ID to resolve: ");
+                    ticketId = system.scanner.nextLine();
+                    system.resolveTicket(ticketId);
+                    break;
+                case 3:
+                    system.listTickets();
+                    break;
+                case 4:
+                    running = false;
+                    System.out.println("Exiting system.");
+                    break;
+                default:
+                    System.out.println("Invalid choice, try again.");
+            }
+        }
+    }
+}
