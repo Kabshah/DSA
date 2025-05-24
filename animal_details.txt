@@ -1,0 +1,17 @@
+Type: Pet
+Name: cow
+Age: 12
+Health: Fit
+Species: idk
+Quantity: 3
+Image: F:\demo\Animal pics\cow.png
+----------------------------------------------
+Type: Jungle
+Name: lion
+Age: 3
+Health: Fit
+Species: african
+Species: Male
+Quantity: 3
+Image: F:\KINGSTON\Project\Animal pics\lion.png
+----------------------------------------------
